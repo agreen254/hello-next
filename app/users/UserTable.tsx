@@ -9,14 +9,14 @@ type User = {
 };
 
 type Props = {
-  sortOrder: "name" | "email";
+  sortOrder: string;
 };
 
 const UserTable = async ({ sortOrder }: Props) => {
   // no need to use a hook
   // all happens on the server side
   const res = await fetch("https://jsonplaceholder.typicode.com/users", {
-    next: { revalidate: 10 }, // fetches new data every 10 seconds
+    next: {}, // fetches new data every 10 seconds
   });
   const users: User[] = await res.json();
   const sortedUsers = sortUsers(users, sortOrder);

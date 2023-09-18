@@ -7,7 +7,7 @@ export type User = {
 };
 
 type Props = {
-  searchParams: { sortOrder: "name" | "email" };
+  searchParams: { sortOrder: string };
 };
 
 const UsersPage = ({ searchParams: { sortOrder } }: Props) => {
