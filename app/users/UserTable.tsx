@@ -1,4 +1,6 @@
 import React from "react";
+import sortUsers from "@/utils/sortUsers";
+import Link from "next/link";
 
 type User = {
   id: number;
@@ -6,25 +8,34 @@ type User = {
   email: string;
 };
 
-const UserTable = async () => {
+type Props = {
+  sortOrder: "name" | "email";
+};
+
+const UserTable = async ({ sortOrder }: Props) => {
   // no need to use a hook
   // all happens on the server side
   const res = await fetch("https://jsonplaceholder.typicode.com/users", {
     next: { revalidate: 10 }, // fetches new data every 10 seconds
   });
   const users: User[] = await res.json();
+  const sortedUsers = sortUsers(users, sortOrder);
 
   return (
     <div className="flex justify-center">
       <table className="table table-bordered max-w-[50vw]">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
+            <th>
+              <Link href="/users?sortOrder=name">Name</Link>
+            </th>
+            <th>
+              <Link href="/users?sortOrder=email">Email</Link>
+            </th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {sortedUsers.map((user) => (
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>

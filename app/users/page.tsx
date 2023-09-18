@@ -1,16 +1,20 @@
 import UserTable from "./UserTable";
 
-type User = {
+export type User = {
   id: number;
   name: string;
   email: string;
 };
 
-const UsersPage = () => {
+type Props = {
+  searchParams: { sortOrder: "name" | "email" };
+};
+
+const UsersPage = ({ searchParams: { sortOrder } }: Props) => {
   return (
     <>
       <h1>Users</h1>
-      <UserTable />
+      <UserTable sortOrder={sortOrder} />
     </>
   );
 };
