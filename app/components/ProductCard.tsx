@@ -3,14 +3,15 @@
 // "use client";
 
 import AddToCart from "./AddToCart";
+import styles from "./ProductCard.module.css";
 
-const ProductCart = () => {
+const ProductCard = () => {
   return (
-    <div>
+    <div className={styles.card}>
       <p>Some complex markup...</p>
       <AddToCart />
     </div>
   );
 };
 
-export default ProductCart;
+export default ProductCard;
