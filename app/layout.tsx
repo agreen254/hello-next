@@ -19,7 +19,10 @@ export default function RootLayout({
     <html lang="en" data-theme="winter">
       <body className={inter.className}>
         <NavBar />
-        <main className="p-5">{children}</main>
+        <main className="p-5">
+          {/* can wrap the children in a Suspense component to show loading */}
+          {children}
+        </main>
       </body>
     </html>
   );
