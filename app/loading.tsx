@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <div>
       <span>Loading</span>
-      <span className="loading loading-spinner loading-md"></span>;
+      <span className="loading loading-spinner loading-md"></span>
     </div>
   );
 };
