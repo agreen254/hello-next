@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/prisma/client";
 import schema from "./schema";
 
 export function GET(request: NextRequest) {
@@ -15,9 +16,23 @@ export async function POST(request: NextRequest) {
 
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });
-  else
+
+  const product = await prisma.product.findUnique({
+    where: { name: body.name },
+  });
+
+  if (product)
     return NextResponse.json(
-      { id: 4, name: body.name, price: body.price },
-      { status: 201 }
+      { error: "Product name already in use." },
+      { status: 400 }
     );
+
+  await prisma.product.create({
+    data: {
+      name: body.name,
+      price: body.price,
+    },
+  });
+
+  return NextResponse.json({"message": "Product created successfully."})
 }
