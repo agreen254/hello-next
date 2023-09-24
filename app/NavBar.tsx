@@ -14,11 +14,17 @@ const NavBar = () => {
     else return <div>{session!.user!.name}</div>;
   };
 
+  const handleLogout = () => {
+    if (status === "authenticated")
+      return <Link href="/api/auth/signout">Logout</Link>;
+  };
+
   return (
     <div className="flex bg-slate-200 p-5 space-x-5">
       <Link href="/">Next.js</Link>
       <Link href="/users">Users</Link>
       {handleLoginStatus()}
+      {handleLogout()}
     </div>
   );
 };
